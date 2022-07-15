@@ -13,3 +13,7 @@
 //Landmarks.
 #define SLANDMARK_FLAG_AUTOSET 1    // If set, will set base area and turf type to same as where it was spawned at
 #define SLANDMARK_FLAG_ZERO_G  2    // Zero-G shuttles moved here will lose gravity unless the area has ambient gravity.
+
+#define SLANDMARK_TYPE_FREE "free" // This type of shuttle land mark can be freely accessesed without docking codes
+#define SLANDMARK_TYPE_EXT "external" // This type of shuttle landmark is an external docking port. can be freely landed at, but the airlocks will only open with codes.
+#define SLANDMARK_TYPE_HANGAR "hangar" // This type of shuttle landmark is a hangar. It cannot be landed at without codes.
