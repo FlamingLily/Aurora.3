@@ -159,6 +159,7 @@ AURORA_ESCAPE_POD(4)
 	landmark_tag = "nav_merchant_dock"
 	docking_controller = "merchant_shuttle_dock"
 	landmark_flags = SLANDMARK_FLAG_AUTOSET
+	landmark_type = SLANDMARK_TYPE_DOCK
 
 //-// Admin Corvette //-//
 
@@ -204,6 +205,9 @@ AURORA_ESCAPE_POD(4)
 	waypoint_station = "nav_ccia_dock"
 	waypoint_offsite = "nav_ccia_start"
 	category = /datum/shuttle/autodock/ferry/autoreturn
+
+/datum/shuttle/autodock/ferry/autoreturn/ccia/authorize_docking()
+	return "ccia" // Can't lock CCIA out by changing docking codes
 
 /obj/effect/shuttle_landmark/ccia/start
 	name = "Agent Shuttle Base"

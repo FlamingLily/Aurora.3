@@ -22,6 +22,8 @@
 	//Name of the shuttle, null for generic waypoint
 	var/shuttle_restricted
 	var/landmark_flags = 0
+	var/landmark_type = SLANDMARK_TYPE_OPEN
+	var/docking_codes = null
 
 /obj/effect/shuttle_landmark/Initialize()
 	. = ..()

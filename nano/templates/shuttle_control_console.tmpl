@@ -23,36 +23,67 @@
 	</div>
 </div>
 {{if data.has_docking}}
-	<div class="item" style="padding-top: 10px">
-		<div class="item">
-			<div class="itemLabel">
-				Docking Status:
-			</div>
-			<div class="itemContent">
-				{{if data.docking_status == "docked"}}
-					<span class="good">DOCKED</span>
-				{{else data.docking_status == "docking"}}
-					{{if !data.docking_override}}
-						<span class="average">DOCKING</span>
-					{{else}}
-						<span class="average">DOCKING-MANUAL</span>
-					{{/if}}
-				{{else data.docking_status == "undocking"}}
-					{{if !data.docking_override}}
-						<span class="average">UNDOCKING</span>
-					{{else}}
-						<span class="average">UNDOCKING-MANUAL</span>
-					{{/if}}
-				{{else data.docking_status == "undocked"}}
-					<span class="idle">UNDOCKED</span>
+<div class="item" style="padding-top: 10px">
+	<div class="item">
+		<div class="itemLabel">
+			Destination:
+		</div>
+    <div class="itemContent">
+    	<span style="font-weight: bold;color: #FFFFFF">{{:data.destination}}</span>
+    </div>
+  </div>
+</div>
+<div class="item" style="padding-top: 10px">
+	<div class="item">
+		<div class="itemLabel">
+			Docking Status:
+		</div>
+		<div class="itemContent">
+			{{if data.docking_status == "docked"}}
+				<span class="good">DOCKED</span>
+			{{else data.docking_status == "docking"}}
+				{{if !data.docking_override}}
+					<span class="average">DOCKING</span>
 				{{else}}
-					<span class="bad">ERROR</span>
+					<span class="average">DOCKING-MANUAL</span>
 				{{/if}}
-
-			</div>
+			{{else data.docking_status == "undocking"}}
+				{{if !data.docking_override}}
+					<span class="average">UNDOCKING</span>
+				{{else}}
+					<span class="average">UNDOCKING-MANUAL</span>
+				{{/if}}
+			{{else data.docking_status == "undocked"}}
+				<span class="idle">UNDOCKED</span>
+			{{else}}
+				<span class="bad">ERROR</span>
+			{{/if}}
 		</div>
 	</div>
+</div>
+<div class="item" style="padding-top: 10px">
+	<div class="item">
+		<div class="itemLabel">
+			Docking Authorization:
+		</div>
+		<div class="itemContent">
+    	  {{if data.docking_auth == "ccia"}}
+    			<span class="good">CCIA PRE-AUTHORIZED</span>
+			  {{else data.docking_auth == "authorized"}}
+    			<span class="good">AUTHORIZATION ACCEPTED</span>
+    	  {{else data.docking_auth == "denied"}}
+      		  	<span class="bad">AUTHORIZATION DENIED</span>
+			  {{else data.docking_auth == "empty"}}
+      		  	<span class="average">DOCKING TARGET NOT SECURED</span>
+    		{{else data.docking_auth == "not_hangar"}}
+        		<span style="font-weight: bold;color: #336699">TARGET NOT DOCKING BAY</span>
+       		{{/if}}
+    		{{:helper.link('Input Auth. Codes', 'locked', {'codes' : '1'})}}
+		</div>
+	</div>
+</div>
 {{/if}}
+
 
 <h3>Shuttle Control</h3>
 <div class="item" style="padding-top: 10px">

@@ -14,6 +14,8 @@
 	var/move_time = 240  //the time spent in the transition area
 	var/minimum_move_time = 15  //the time spent in the transition area when both of the locations are located on station z-levels
 
+	var/docking_codes
+
 	category = /datum/shuttle/autodock
 	flags = SHUTTLE_FLAGS_PROCESS | SHUTTLE_FLAGS_ZERO_G
 
@@ -141,7 +143,7 @@
 	Guards
 */
 /datum/shuttle/autodock/proc/can_launch()
-	return (next_location && moving_status == SHUTTLE_IDLE && !in_use)
+	return (next_location && moving_status == SHUTTLE_IDLE && !in_use && !(authorize_docking(next_location) == "denied"))
 
 /datum/shuttle/autodock/proc/can_force()
 	return (next_location && moving_status == SHUTTLE_IDLE && process_state == WAIT_LAUNCH)
@@ -152,6 +154,16 @@
 /*
 	"Public" procs
 */
+/datum/shuttle/autodock/proc/authorize_docking(var/obj/effect/shuttle_landmark/destination)
+	if(destination.landmark_type == SLANDMARK_TYPE_OPEN)
+		return "not_hangar"
+	else
+		if(destination.docking_codes == null || destination.docking_codes == "")
+			return "empty"
+		if(destination.docking_codes == docking_codes)
+			return "authorized"
+	return "denied"
+
 /datum/shuttle/autodock/proc/launch(var/user)
 	if(!can_launch())
 		return

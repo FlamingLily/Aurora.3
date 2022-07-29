@@ -2927,6 +2927,7 @@
 #include "code\modules\shuttles\city.dm"
 #include "code\modules\shuttles\departmental.dm"
 #include "code\modules\shuttles\escape_pods.dm"
+#include "code\modules\shuttles\hangar_controller.dm"
 #include "code\modules\shuttles\landmarks.dm"
 #include "code\modules\shuttles\shuttle.dm"
 #include "code\modules\shuttles\shuttle_arrival.dm"

@@ -63,6 +63,8 @@
 		"shuttle_state" = shuttle_state,
 		"has_docking" = shuttle.active_docking_controller? 1 : 0,
 		"docking_status" = shuttle.active_docking_controller? shuttle.active_docking_controller.get_docking_status() : null,
+		"destination" = shuttle.get_destination_name(),
+		"docking_auth" = shuttle.authorize_docking(shuttle.next_location),
 		"docking_override" = shuttle.active_docking_controller? shuttle.active_docking_controller.override_enabled : null,
 		"can_launch" = shuttle.can_launch(),
 		"can_cancel" = shuttle.can_cancel(),
@@ -116,6 +118,11 @@
 
 	if(href_list["cancel"])
 		shuttle.cancel_launch(src)
+		return TOPIC_REFRESH
+
+	if(href_list["codes"])
+		var/codes = input(user, "Input docking authorization codes.", "Docking auth. codes.", null)
+		shuttle.docking_codes = codes
 		return TOPIC_REFRESH
 
 /obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
